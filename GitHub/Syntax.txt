@@ -1,0 +1,33 @@
+1)New repository
+2)Copy url
+3)Vs code terminal-
+cd <destination_folder>-into folder you want it to be cloned
+git clone <url>-clones into local server
+
+cd <folder>-come into the repository folder
+
+Open folder and select the cloned folder
+
+git add <file.py>-adds the file to stage it and now it tracks it to check if its being modified
+git add .-adds all the files in the repository to stage and track
+
+git commit -m "<add message>"-saves the changes in your local file
+
+git push -u origin-pushes the changes into main branch
+
+git status-shows files that have been modified
+
+git reset HEAD <file.py>-unstages the file
+git reset HEAD-unstages all the files
+
+
+git checkout -b <branch name>-create snew branch and moves into it locally
+git checkout main-moves into main branch locally
+git checkout <branch_name>-moves to the branch
+[After moving to branch you need to add again]
+
+git pull origin main-pulls changes from main server
+
+git merger <branch_name>-merges the branch_name to the branch you are currently on
+
+

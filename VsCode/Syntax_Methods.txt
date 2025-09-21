@@ -1,0 +1,4 @@
+1)To open new window-
+Ctrl + ,
+Type-window.restoreWindows
+none
