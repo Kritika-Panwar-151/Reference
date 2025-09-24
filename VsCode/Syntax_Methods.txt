@@ -2,3 +2,24 @@
 Ctrl + ,
 Type-window.restoreWindows
 none
+
+2)To remove predictive text:
+Ctrl + Shift + P 
+Type Preferences: Open Settings (JSON).
+
+"files.associations": {
+    "*.py": "python"
+},
+"editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+},
+"editor.suggestOnTriggerCharacters": false,
+"editor.parameterHints.enabled": false,
+"editor.inlineSuggest.enabled": false,
+"editor.suggest.showWords": false,
+"editor.suggest.showSnippets": false
+}
+
+Add what is not there in it
