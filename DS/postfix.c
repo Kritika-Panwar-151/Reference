@@ -1,74 +1,131 @@
 #include<stdio.h>
-int stacks[20];
+#include<ctype.h>
+#include<stdlib.h>
+#define size 15
+char stacks[size];
+char postfix[size];
+char s[size];
 int pointer=-1;
-void pop(char op);
-void push(char ch);
+int i=-1;
+
+
+void push(char e);
+char pop();
+int isempty();
+int isfull();
+int pr(char op);
 int main()
 {
-    char s[20];
+    
     printf("Enter the equation:");
     scanf("%s",s);
-    char opd[]="+-/*";
-    int c=0;
-    for(int i=0;s[i]!='\0';i++)
+    int j=0;
+    while(s[j]!='\0')
     {
-        for(int j=0;j<4;j++)
-    {
-        if(s[i]==opd[j])
+
+        char ch=s[j];
+
+        if(isalnum(ch))
         {
-            pop(s[i]);
-            break;
+
+            postfix[++i]=ch;
         }
-        push(s[i]);
+        else if(ch=='(')
+        {   
+            push(ch);
+        }
+        else if(ch==')')
+        {
+            while(stacks[pointer]!='(')
+            {
+                postfix[++i]=pop();
+            }
+            pop();
+        }
+        else
+        {
+            while(!isempty() && pr(stacks[pointer])>=pr(ch) )
+            {
+                postfix[++i]=pop();
+            }
+            push(ch);
+
+        }
+        j++;
     }
-    }
-    if(pointer==0)
+
+    while(pointer!=-1)
     {
-        printf("The reult is: %d",stacks[0]);
+        postfix[++i]=pop();
+    }
+    postfix[++i]='\0';
+    printf("Postfix:%s",postfix);
+
+}
+
+void push(char e)
+{
+    if(!isfull())
+    {
+        stacks[++pointer]=e;
+    }
+}
+char pop()
+{
+    if(!isempty())
+    {
+        return stacks[pointer--];
     }
     else
     {
-        printf("Wrong Equation1");
+        exit(0);
     }
 }
-void pop(char op)
+int isempty()
 {
-    printf(" %d",pointer);
-
     if(pointer==-1)
     {
-        printf("Wrong Equation2");
+        return 1;
     }
     else
     {
-        int b=stacks[pointer--];
-        int a=stacks[pointer--];
-        int c;
-        switch(op)
-        {
-            case '+':
-                c=a+b;
-                break;
-            case '-':
-                c=a-b;
-                break;
-            case '*':
-                c=a*b;
-                break;
-            case '/':
-                c=a/b;
-                break;
-            default:
-                printf("Wrong Equation3");
-        }
-        
-        stacks[++pointer]=c;
-        
+        return 0;
     }
 }
-void push(char ch)
+int isfull()
 {
-    printf("Push=%d,pointer= %d",ch,pointer);
-    stacks[++pointer]=(int)ch;
-    printf("\nAfter pushing %d pointer= %d",ch,pointer);
+    if(pointer==size-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
+
+int pr(char op)
+{
+    if(op=='(' || op==')')
+    {
+        return -1;
+    }
+    else if(op=='+' || op=='-')
+    {
+        return 0;
+    }
+    else if(op=='*' || op=='/')
+    {
+        return 1;
+    }
+    else if(op=='^')
+    {
+        return 2;
+    }
+    else
+    {
+        printf("Wrong operator");
+        exit(0);
+    }
+}
+
