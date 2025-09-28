@@ -1,6 +1,6 @@
 #include<stdio.h>
-#include<ctype.h>
 #include<stdlib.h>
+#include<ctype.h>
 #define size 15
 char stacks[size];
 char postfix[size];
@@ -8,59 +8,60 @@ char s[size];
 int pointer=-1;
 int i=-1;
 
-
 void push(char e);
 char pop();
 int isempty();
 int isfull();
 int pr(char op);
-int main()
+
+void main()
 {
-    
-    printf("Enter the equation:");
-    scanf("%s",s);
-    int j=0;
-    while(s[j]!='\0')
+
+    char check='y';
+    while(check=='y')
     {
-
-        char ch=s[j];
-
-        if(isalnum(ch))
+        pointer=-1;
+        i=-1;
+        printf("\nEnter the equation:");
+        scanf("%s",s);
+        for(int j=0;s[j]!='\0';j++)
         {
+            char ch=s[j];
+            if(isalnum(ch))
+            {
+                postfix[++i]=ch;
+            }
+            else if(ch=='(')
+            {
+                push(ch);
+            }
+            else if(ch==')')
+            {
+                while(stacks[pointer]!='(')
+                {
+                    postfix[++i]=pop();
+                }
+                pop();
+            }
+            else
+            {
+                while(!isempty() && pr(stacks[pointer])>=pr(ch))
+                {
+                    postfix[++i]=pop();
+                }
+                push(ch);
+            }
 
-            postfix[++i]=ch;
         }
-        else if(ch=='(')
-        {   
-            push(ch);
-        }
-        else if(ch==')')
-        {
-            while(stacks[pointer]!='(')
+        while(pointer!=-1)
             {
                 postfix[++i]=pop();
             }
-            pop();
-        }
-        else
-        {
-            while(!isempty() && pr(stacks[pointer])>=pr(ch) )
-            {
-                postfix[++i]=pop();
-            }
-            push(ch);
-
-        }
-        j++;
+        postfix[++i]='\0';
+        printf("Postfix: %s",postfix);
+        printf("\nDo you want to continue(y/n):");
+        scanf(" %c",&check);
     }
-
-    while(pointer!=-1)
-    {
-        postfix[++i]=pop();
-    }
-    postfix[++i]='\0';
-    printf("Postfix:%s",postfix);
-
 }
 
 void push(char e)
@@ -68,6 +69,11 @@ void push(char e)
     if(!isfull())
     {
         stacks[++pointer]=e;
+    }
+    else
+    {
+        printf("Overflow");
+        exit(0);
     }
 }
 char pop()
@@ -78,6 +84,7 @@ char pop()
     }
     else
     {
+        printf("Underflow");
         exit(0);
     }
 }
@@ -103,7 +110,6 @@ int isfull()
         return 0;
     }
 }
-
 int pr(char op)
 {
     if(op=='(' || op==')')
@@ -128,4 +134,3 @@ int pr(char op)
         exit(0);
     }
 }
-
