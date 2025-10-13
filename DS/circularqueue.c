@@ -102,11 +102,19 @@ void dequeue()
 
 void display()
 {
-    int f=front;
-    int r=rear;
-    do
+    if(isempty())
     {
-        printf("%d ",queue[f]);
-        f=(f+1)%size;
-    }while(f!=(r+1)%size);
+        printf("Underflow");
+    }
+    else
+    {
+        int f=front;
+        int r=rear;
+        do
+        {
+            printf("%d ",queue[f]);
+            f=(f+1)%size;
+        }while(f!=(r+1)%size);
+    }
+    
 }

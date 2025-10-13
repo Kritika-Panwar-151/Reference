@@ -98,9 +98,17 @@ void dequeue()
 
 void display()
 {
-    for(int i=front;i<=rear;i++)
+    if(isempty())
     {
-        printf("%d ",queue[i]);
+        printf("Underflow");
     }
-    printf("\n");
+    else
+    {
+        for(int i=front;i<=rear;i++)
+        {
+            printf("%d ",queue[i]);
+        }
+        printf("\n");
+    }
+    
 }
