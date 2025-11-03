@@ -27,7 +27,14 @@ void main()
                 enqueue(n);
                 break;
             case 2:
-                dequeue();
+                if(isempty())
+                {
+                    printf("Underflow");
+                }
+                else
+                {
+                    dequeue();
+                }
                 break;
             case 3:
                 display();
@@ -36,7 +43,7 @@ void main()
                 printf("Wrong option");
 
         }
-        printf("Front:%d Rear:%d",front,rear);
+
         printf("\nDo you want to contineu?(y/n):");
         scanf(" %c",&check);
     }
@@ -86,18 +93,18 @@ void enqueue(int n)
 
 void dequeue()
 {
-    if(isempty())
+    int p;
+    if(front==rear)
     {
-        printf("Underflow");
-    }
-    else if(front==rear)
-    {
+        p=queue[front];
         front=rear=-1;
     }
     else
     {
+        p=queue[front];
         front=(front+1)%size;
     }
+    printf("Popped element:%d",p);
 }
 
 void display()
@@ -116,5 +123,5 @@ void display()
             f=(f+1)%size;
         }while(f!=(r+1)%size);
     }
-    
+
 }

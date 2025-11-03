@@ -26,7 +26,15 @@ void main()
                 enqueue(n);
                 break;
             case 2:
-                dequeue();
+                if(isempty())
+                {
+                    printf("Underflow");
+                }
+                else
+                {
+                    dequeue();
+                }
+
                 break;
             case 3:
                 display();
@@ -82,18 +90,18 @@ void enqueue(int n)
 
 void dequeue()
 {
-    if(isempty())
+    int p;
+    if(front==rear)
     {
-        printf("Underflow");
-    }
-    else if(front==rear)
-    {
+        p=queue[front];
         front=rear=-1;
     }
     else
     {
+        p=queue[front];
         ++front;
     }
+    printf("Popped element:%d",p);
 }
 
 void display()
@@ -110,5 +118,5 @@ void display()
         }
         printf("\n");
     }
-    
+
 }
