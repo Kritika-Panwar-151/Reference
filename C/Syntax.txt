@@ -1,3 +1,0 @@
-For runing C-
-cd C 
-.\<filename>.exe

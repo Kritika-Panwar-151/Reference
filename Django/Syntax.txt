@@ -1,0 +1,16 @@
+1)Cloning-
+cd <repo url>
+delete env file
+python -m venv env
+.\env\Scripts\activate
+pip install django
+pip install mysqlclient
+cd django_project\cd myproject
+python manage.py makemigrations
+python manage.py migrate
+
+2)Making MySQL connection-
+create database <database_name>;
+craete user '<username>'@'localhost' identified by '<password>';
+grant all privileges on <database_name>.* to '<username>'@'localhost';
+flush privileges;
